@@ -1,0 +1,67 @@
+--1) SELECCIONA LAS COLUMNAS film_id y title  de la tabla film
+
+SELECT  film_id , title FROM film;
+
+--2)SELECCION LAS 5 FILAS DE LA TABLA  FILM , OBTENIENDO  TODAS  LAS COLUMNAS
+
+SELECT * FROM film LIMIT 5;
+
+--3)Selecciona filas de la tabla film donde film_id sea menor que 4
+
+SELECT * FROM film WHERE film_id < 4;
+
+--4)Selecciona filas de la tabla film  donde el rating sea PG O G
+
+SELECT * FROM film WHERE rating ='PG' OR rating =  'G';
+
+--5)Selecciona filas de la tabla actor donde el nombre sea Angela, Angelina o Audrey usando IN
+
+SELECT * FROM actor WHERE first_name IN ('Angela' , 'Angeline' , 'Audrey');
+
+--6)Obten  una lista  de actores  con el nombre Julia.
+
+SELECT first_name FROM  actor WHERE first_name = 'Julia';
+
+--7)Obten una lista de actores con el nombre  Chris, Cameron, o Cuba
+
+SELECT first_name,last_name FROM actor  WHERE  first_name IN('Chris', 'Cameron',  'Cuba');
+
+--8)Selecciona la fila  de la tabla customer para el cliente nombre Jamie Rice
+
+SELECT * FROM customer WHERE first_name = 'Jamie' AND last_name='Rice';
+
+--9)Selecciona  el monto y la fecha de pago de la tabla payment donde el monto pagado sea menor a $1
+
+SELECT  amount,payment_date FROM payment WHERE amount < '1';
+
+--10)Cuales son las diferentes duraciones de alquiler permitidas por la tienda?
+
+SELECT rental_duration,  COUNT(rental_duration)
+FROM  film
+GROUP BY rental_duration;
+
+--11)Ordena las filas de la tabla city por country_id
+
+SELECT country_id FROM city
+GROUP BY country_id;
+
+--12)Ordena las filas de la tabla city por luego por city
+
+SELECT city FROM city
+GROUP BY city;
+
+--13)Cuales son los ID  de los ultimos 3 clientes  que devolvieron un alquiler
+
+SELECT customer_id FROM rental ORDER BY return_date LIMIT 3;
+
+--14)Cuantas peliculas  tienen la clasificacion NC-17? Cuantas pg y pg-13
+
+SELECT COUNT (rating) FROM film
+WHERE rating IN('NC-17','PG','PG-13')
+GROUP BY rating;
+
+--15)Cuantos clientes diferentes tiene registros en la tabla rental
+SELECT COUNT(rental_id) FROM rental;
+
+--16)Cuenta el numero de ciudades para cada country_id en la tabla city, ORDENA los  resultados por count(*)
+SELECT country_id , COUNT(*) FROM city GROUP BY country_id;
